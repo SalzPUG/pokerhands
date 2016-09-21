@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>SalzPUG Python Coding Dojo</title>
+    <meta charset="utf-8">
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Yanone+Kaffeesatz);
+      @import url(https://fonts.googleapis.com/css?family=Droid+Serif:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body { font-family: 'Droid Serif'; }
+      h1, h2, h3 {
+        font-family: 'Yanone Kaffeesatz';
+        font-weight: normal;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+
+      .logo img { width: 100%; }
+      .tdd { display: block; text-align:center; }
+      .tdd img { transform: scale(0.8); }
+    </style>
+  </head>
+  <body>
+    <textarea id="source">
+      class: center, middle
+
+      .logo[![SalzPUG Logo](salzpug.svg)]
+
+      # Python Coding Dojo
+
+      .left[```python
+      from datetime import date
+      today = date.today()
+      today.strftime('%B %-d, %Y')
+      ```]
+
+      ---
+
+      layout: true
+
+      # Coding Dojo?
+
+      ---
+
+      * Code
+      * Learn
+      * Have Fun
+
+      ---
+
+      * Safe place, not work
+      * Our goal: to learn
+      * *Not* our goal: to finish the task
+
+      ---
+
+      layout: false
+
+      # Practices
+
+      * Test-Driven Development
+      * Pair Programming
+
+      ---
+
+      layout: true
+      
+      # Test-Driven Development
+
+      ---
+      
+      .tdd[![TDD](tdd.gif)]
+
+      ---
+
+      ## Case Study: Fizz buzz
+
+      > Given a number either output
+      > * "Fizz", if its divisable by three
+      > * "buzz", if its divisable by five
+      > * otherwise the number itself
+
+      https://en.wikipedia.org/wiki/Fizz_buzz
+
+      ---
+
+      ## Iteration 1
+
+      ```python
+      from nose.tools import *
+      import fizzbuzz
+
+      *def test_1_returns_1():
+      *   assert_equal(fizzbuzz.fizzbuzz(1), "1")
+      ```
+
+      --
+
+      ```python
+      def fizzbuzz(number):
+          return 1
+      ```
+
+      ---
+
+      ## Iteration 2
+
+      ```python
+      from nose.tools import *
+      import fizzbuzz
+
+      def test_1_returns_1():
+          assert_equal(fizzbuzz.fizzbuzz(1), "1")
+
+      *def test_2_returns_2():
+      *   assert_equal(fizzbuzz.fizzbuzz(2), "2")
+      ```
+
+      --
+
+      ```python
+      def fizzbuzz(number):
+          return str(number)
+      ```
+
+      ---
+
+      ## Iteration 3
+
+      ```python
+      from nose.tools import *
+      import fizzbuzz
+
+      def test_1_returns_1():
+          assert_equal(fizzbuzz.fizzbuzz(1), "1")
+
+      def test_2_returns_2():
+          assert_equal(fizzbuzz.fizzbuzz(2), "2")
+
+      *def test_3_returns_Fizz():
+      *   assert_equal(fizzbuzz.fizzbuzz(3), "Fizz")
+      ```
+
+      --
+
+      ```python
+      def fizzbuzz(number):
+          if number == 3:
+              return "Fizz"
+          return str(number)
+      ```
+
+      ---
+
+      .center[What will be the next test?]
+
+      ---
+
+      layout: false
+
+      # Pair Programming
+
+      * Driver
+        * types at the computer
+
+      --
+
+      * Navigator
+        * looks for *tactical defects* (syntax errors, typos, etc.)
+        * looks for *strategic defects* (implementation or design fails to accomplish its goal)
+        * strategic, long-term thinker
+
+      --
+
+      An effective pair should be in constant discussion.
+
+      ---
+
+      # Workflow
+
+      * Introduction
+      * Discussion
+      * Working on the problem
+        * 1 driver, 1 navigator
+        * changed every 5 minutes (audience -> navigator -> driver)
+      * Break
+      * Working on the problem (second round)
+      * Retrospective
+
+      ---
+
+      # Poker Hands
+
+      Your job is to compare several pairs of poker hands and to indicate
+      which, if either, has a higher rank.
+
+      ---
+
+      layout: true
+
+      # Poker Rules
+
+      ---
+
+      A poker deck contains 52 cards - each card has a suit which is one of
+      clubs, diamonds, hearts, or spades (denoted C, D, H, and S in the input
+      data). Each card also has a value which is one of 2, 3, 4, 5, 6, 7, 8,
+      9, 10, jack, queen, king, ace (denoted 2, 3, 4, 5, 6, 7, 8, 9, T, J, Q,
+      K, A). For scoring purposes, the suits are unordered while the values
+      are ordered as given above, with 2 being the lowest and ace the highest
+      value.
+
+      ---
+
+      A poker hand consists of 5 cards dealt from the deck. Poker hands are
+      ranked by the following partial order from lowest to highest.
+
+      * High Card: Hands which do not fit any higher category are ranked by
+      the value of their highest card. If the highest cards have the same
+      value, the hands are ranked by the next highest, and so on.
+
+      * Pair: 2 of the 5 cards in the hand have the same value. Hands which
+      both contain a pair are ranked by the value of the cards forming the
+      pair. If these values are the same, the hands are ranked by the values
+      of the cards not forming the pair, in decreasing order.
+
+      * Two Pairs: The hand contains 2 different pairs. Hands which both
+      contain 2 pairs are ranked by the value of their highest pair. Hands
+      with the same highest pair are ranked by the value of their other
+      pair. If these values are the same the hands are ranked by the value of
+      the remaining card.
+
+      ---
+
+      * Three of a Kind: Three of the cards in the hand have the same
+      value. Hands which both contain three of a kind are ranked by the value
+      of the 3 cards.
+
+      * Straight: Hand contains 5 cards with consecutive values. Hands which
+      both contain a straight are ranked by their highest card.
+
+      * Flush: Hand contains 5 cards of the same suit. Hands which are both
+      flushes are ranked using the rules for High Card.
+
+      * Full House: 3 cards of the same value, with the remaining 2 cards
+      forming a pair. Ranked by the value of the 3 cards.
+
+      * Four of a kind: 4 cards with the same value. Ranked by the value of
+      the 4 cards.
+
+      * Straight flush: 5 cards of the same suit with consecutive
+      values. Ranked by the highest card in the hand.
+
+      ---
+
+      layout: false
+
+      # Retrospective
+
+      --
+
+      * Happy with the result?
+
+        * whats good?
+        * whats bad?
+        * more refactoring necessary?
+
+      --
+
+      * Did we learn anything new?
+
+      --
+
+      * Did anything unexpected happen?
+
+      --
+
+      * What do we still need to practice more?
+
+      --
+
+      * What should we do differently in the next dojo?
+
+      --
+
+      * What will you do differently in your day-to-day job?
+    </textarea>
+    <script src="https://gnab.github.io/remark/downloads/remark-latest.min.js">
+    </script>
+    <script>
+      var slideshow = remark.create({
+        highlightLines: true
+      });
+    </script>
+  </body>
+</html>
